@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchWeather } from '../actions/index';
 
-export default class SearchBar extends Component {
+class SearchBar extends Component {
   constructor(props) {
     super(props)
 
@@ -46,3 +49,16 @@ export default class SearchBar extends Component {
     )
   }
 }
+
+
+//fetchWeather causes the action creator to return an action, binds the
+//action creators with dispatch and makes sure the action flows down
+//the middleware and then the reducers imside the Redux application
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators( {fetchWeather}),(dispatch);
+}
+
+//the null will make sure that whenever we pass in a function that is
+//supposed to mapDispatchToProps of our container, it always goes in
+//as the second argument in the line below.
+export default connect(null, mapDispatchToProps)(SearchBar);
