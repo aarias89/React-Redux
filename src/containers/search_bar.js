@@ -5,10 +5,16 @@ export default class SearchBar extends Component {
     super(props)
 
     this.state = { term: ''};
+
+    //2ndthis(instance of SearchBar), has a function called onInputChange
+    //bind that function to this(inside bind), replace  value of
+    //1stthis.onInputChange with value of binded this.
+    this.onInputChange = this.onInputChange.bind(this);
   }
 
   onInputChange(event) {
     console.log(event.target.value)
+    this.setState({ term: event.target.value })
   }
 
 
@@ -19,6 +25,9 @@ export default class SearchBar extends Component {
           placeholder="Get a five-day forecast"
           className="form-control"
           value={this.state.term}
+          //Usually if a callback(like onInputChange) is being passed around,
+          //and the callback has a reference to 'this', you will need to bind
+          //bind the context.
           onChange={this.onInputChange}
          />
         <span className="input-group-btn">
