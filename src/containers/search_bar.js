@@ -13,6 +13,7 @@ class SearchBar extends Component {
     //bind that function to this(inside bind), replace  value of
     //1stthis.onInputChange with value of binded this.
     this.onInputChange = this.onInputChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
   onInputChange(event) {
@@ -23,7 +24,9 @@ class SearchBar extends Component {
   onFormSubmit(event) {
     event.preventDefault();
 
-    //we need to go and fetch weather data
+    //this is where the weather data gets fetched.
+    this.props.fetchWeather(this.state.term);
+    this.setState( {term: ''} );
   }
 
 
@@ -55,7 +58,7 @@ class SearchBar extends Component {
 //action creators with dispatch and makes sure the action flows down
 //the middleware and then the reducers imside the Redux application
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators( {fetchWeather}),(dispatch);
+  return bindActionCreators( {fetchWeather},dispatch);
 }
 
 //the null will make sure that whenever we pass in a function that is

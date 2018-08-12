@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API_KEY = "594da4a5f67a0a1420a9264004d57971";
-const ROOT_URL = `api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}`;
+const ROOT_URL = `https://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}`;
 
 //As convention, make a single varaible that hold Action type.
 export const FETCH_WEATHER = 'FETCH_WEATHER'
@@ -13,6 +13,7 @@ export function fetchWeather(city) {
   //axios will return a promise, and pass it to the function as the payload
   const request = axios.get(url);
 
+  console.log(url);
   return {
     type: FETCH_WEATHER,
     payload: request
